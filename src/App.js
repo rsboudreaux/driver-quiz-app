@@ -15,7 +15,14 @@ class App extends Component {
       question: '',
       answerOptions: [],
       answer: '',
-      answersCount: {},
+      answersCount: {
+        certainty: 0,
+        uncertainty: 0,
+        significance: 0,
+        connection: 0,
+        growth: 0,
+        contribution: 0
+      },
       result: ''
     };
 
@@ -24,8 +31,8 @@ class App extends Component {
 
   componentDidMount() {
     const shuffledAnswerOptions = quizQuestions.map(question =>
-      this.shuffleArray(question.answers)
-    );
+  this.shuffleArray(question.answers)
+  );
     this.setState({
       question: quizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0]
@@ -33,12 +40,11 @@ class App extends Component {
   }
 
   shuffleArray(array) {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
+
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -91,7 +97,7 @@ class App extends Component {
     const answersCountValues = answersCountKeys.map(key => answersCount[key]);
     const maxAnswerCount = Math.max.apply(null, answersCountValues);
 
-    return answersCountKeys.filter(key => answersCount[key] === maxAnswerCount);
+    return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
   }
 
   setResults(result) {
@@ -119,7 +125,7 @@ class App extends Component {
     return <Result quizResult={this.state.result} />;
   }
 
-  render() {
+  render () {
     return (
       <div className="App">
         <div className="App-header">
@@ -132,4 +138,4 @@ class App extends Component {
   }
 }
 
-export default App;
+  export default App;
